@@ -1,5 +1,5 @@
 <!doctype html><html lang="ko"><head>
-<meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;sha256-rNeUZzzJydiXLV9N1y5Ct3lap+tEh07iwRjAXG6fxFc=&#x27; &#x27;sha256-H87p6/Sa0PHN32jjO2eLfnzwfvsjgH4CJYTKhOdUJ3Q=&#x27;; style-src &#x27;unsafe-inline&#x27;; img-src data:; connect-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;; object-src &#x27;none&#x27;">
+<meta http-equiv="Content-Security-Policy" content="default-src &#x27;none&#x27;; script-src &#x27;sha256-F1obOTaB661gHuL4qO440RlHeAD1wITYskSkJkZICBs=&#x27; &#x27;sha256-H87p6/Sa0PHN32jjO2eLfnzwfvsjgH4CJYTKhOdUJ3Q=&#x27;; style-src &#x27;unsafe-inline&#x27;; img-src data:; connect-src &#x27;none&#x27;; base-uri &#x27;none&#x27;; form-action &#x27;none&#x27;; object-src &#x27;none&#x27;">
 <meta name="referrer" content="no-referrer">
 <meta name="robots" content="noindex,nofollow">
 <meta http-equiv="refresh" content="300">
@@ -220,7 +220,7 @@ section>*,.hero-card>*,#pred>*,#ret>*,#paper>*,.panel>*{min-width:0}
       <section class="hero-card" style="gap:10px"><div class="chart-head"><span class="lbl">KOSPI</span><span class="px mono" id="kPx">—</span><span class="mono" id="kChg"></span><span class="lbl" id="kDate"></span><span class="aitag" id="kAi"></span></div>
         <div class="ev" id="quoteNotice">게시 시점의 종가 스냅샷입니다. 공유 주소는 5분마다 게시본을 확인하며, 실시간 시세 조회는 하지 않습니다.</div>
         <div id="kChart"><div class="empty">이 스냅샷에는 KOSPI 시세가 없습니다 (다음 분석부터 포함).</div></div>
-        <div class="legend"><span><i style="background:var(--chart-price)"></i>종가</span><span><i class="sw20"></i>20일선</span><span><i class="sw60"></i>60일선</span><span style="color:var(--ink-2)">AI ▲/▼ = AI 예측 방향</span></div>
+        <div class="legend"><span><i style="background:var(--chart-price)"></i><span id="priceSeriesLabel">종가</span></span><span><i class="sw20"></i>20일선</span><span><i class="sw60"></i>60일선</span><span style="color:var(--ink-2)">AI ▲/▼ = AI 예측 방향</span></div>
         <div id="aiTrack"></div>
         <div class="inds" id="inds"></div></section>
       <section class="hero-card" style="gap:12px"><h2>오늘의 KOSPI 예측</h2><div id="pred" style="display:grid;gap:12px"></div></section>
@@ -404,7 +404,7 @@ section>*,.hero-card>*,#pred>*,#ret>*,#paper>*,.panel>*{min-width:0}
     var g=e.target&&e.target.closest?e.target.closest('g[data-tip]'):null;
     if(g&&$('aiTip')){if(ev==='keydown')e.preventDefault();$('aiTip').textContent=g.getAttribute('data-tip');}
   });});}
-  if(liveQuote){$('quoteNotice').textContent='PC에서 5분마다 KOSPI 시세 확인 · 게시·새로고침 지연 가능 · 시세 수집 '+liveQuote.checked_at+' · AI 예측/모의계좌는 별도 갱신';}
+  if(liveQuote){$('priceSeriesLabel').textContent=liveQuote.intraday?'종가 / 오늘 장중값':'종가';$('quoteNotice').textContent='PC에서 5분마다 KOSPI 시세 확인 · 게시·새로고침 지연 가능 · 시세 수집 '+liveQuote.checked_at+' · AI 예측/정량지표/모의계좌는 별도 갱신';}
   var IN=[];
   if(Q.rsi14!=null)IN.push(['RSI(14)',Q.rsi14,QL.rsi]); if(Q.macd)IN.push(['MACD 히스토그램',Q.macd.hist,QL.macd]); if(Q.bb_pct_b!=null)IN.push(['볼린저 %B',Q.bb_pct_b,QL.bb]);
   if(Q.ma)IN.push(['이평 배열',Q.ma.above_ma20?'20일선 위':'20일선 아래',Q.ma.state]); if(Q.realized_vol_20!=null)IN.push(['실현변동성(연율)',Q.realized_vol_20+'%',QL.vol]);
